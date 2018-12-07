@@ -113,7 +113,7 @@ function clone (a) {
 function leaves (root, childProperty) {
   if (Object.prototype.hasOwnProperty.call(root, childProperty)) {
     const children = root[childProperty].map(child => leaves(child, childProperty))
-    return Array.concat(...children)
+    return Array.prototype.concat(...children)
   }
 
   return [root]
@@ -122,7 +122,7 @@ function leaves (root, childProperty) {
 function iterTree (root, childProperty) {
   if (Object.prototype.hasOwnProperty.call(root, childProperty)) {
     const children = root[childProperty].map(child => leaves(child, childProperty))
-    return Array.concat(root, ...children)
+    return Array.prototype.concat(root, ...children)
   }
 
   return [root]
