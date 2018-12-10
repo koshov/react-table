@@ -26,7 +26,7 @@
     "media/*.png"
   ],
   "scripts": {
-    "prepare": "yarn build",
+    "prepare": "npm run build",
     "build:cjs": "babel src --out-dir lib --source-maps inline",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --source-maps inline",
     "build:umd": "cross-env BABEL_ENV=umd rollup -c",
