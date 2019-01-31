@@ -175,6 +175,37 @@ export default Base =>
         }
       }
 
+      // Determine maximum column depth
+      const getDeepestBranch = column => {
+        if (column.columns) {
+          const subBranches = column.columns.map(getDeepestBranch)
+          let deepestBranch
+          subBranches.forEach(branch => {
+            if (!deepestBranch || deepestBranch.length < branch.length) {
+              deepestBranch = branch
+            }
+          })
+          return [column].concat(deepestBranch)
+        }
+        return [column]
+      }
+      const columnDepths = allVisibleColumns
+        .map(getDeepestBranch)
+        .map(branch => branch.length)
+      const maxDepth = Math.max(...columnDepths)
+
+      // Pad last column up to maximum depth
+      const lastColumn = _.last(allVisibleColumns)
+      const lastColumnDepth = getDeepestBranch(lastColumn).length
+      if (lastColumnDepth < maxDepth) {
+        for (let i = 0; i < maxDepth - lastColumnDepth; i++) {
+          allVisibleColumns[allVisibleColumns.length - 1] = {
+            ...this.props.column,
+            columns: [_.last(allVisibleColumns)],
+          }
+        }
+      }
+
       // Build Visible Columns and Header Groups
       const allColumnHeaders = []
 
