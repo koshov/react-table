@@ -86,7 +86,12 @@
   },
   "babel": {
     "presets": [
-      "env",
+      [
+        "env",
+        {
+          "modules": "commonjs"
+        }
+      ],
       "react"
     ],
     "plugins": [
