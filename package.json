@@ -85,6 +85,10 @@
     "stylus": "^0.54.5"
   },
   "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
     "plugins": [
       "transform-object-rest-spread",
       "transform-class-properties"
