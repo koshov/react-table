@@ -15,7 +15,7 @@
     "datagrid"
   ],
   "main": "lib/index.js",
-  "module": "es/index.js",
+  "module": "lib/index.js",
   "files": [
     "src/",
     "es/",
@@ -27,6 +27,7 @@
   ],
   "scripts": {
     "prepare": "yarn build",
+    "build": "npm-run-all --parallel build:*",
     "build:cjs": "babel src --out-dir lib --source-maps inline",
     "build:css": "rimraf react-table.css && stylus src/index.styl --compress -o react-table.css && yarn css:autoprefix",
     "css:autoprefix": "postcss --use autoprefixer react-table.css -r",
@@ -34,7 +35,6 @@
     "watch:js": "onchange 'src/**/*.js' -i -- yarn build:cjs",
     "watch:css": "onchange 'src/**/*.styl' -i -- yarn build:css",
     "test": "eslint src",
-    "build": "npm-run-all build:*",
     "prepublish": "yarn build",
     "postpublish": "git push --tags",
     "docs": "yarn watch & cd docs && yarn && yarn start",
